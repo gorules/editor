@@ -1,0 +1,53 @@
+name: 'Validate'
+
+on:
+  pull_request:
+  push:
+    branches:
+      - master
+
+permissions:
+  contents: read
+
+jobs:
+  codequality:
+    name: 'Code quality'
+    runs-on: ubuntu-latest
+    continue-on-error: true
+    timeout-minutes: 3
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          persist-credentials: false
+
+      - name: Install Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16
+
+      - uses: pnpm/action-setup@v2
+        with:
+          version: 8
+          run_install: true
+
+      - name: 'Lint'
+        run: pnpm lint
+
+      - name: 'Typecheck'
+        run: pnpm typecheck
+
+  rust-codequality:
+    name: 'Rust code quality'
+    runs-on: ubuntu-latest
+    continue-on-error: true
+    timeout-minutes: 3
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          persist-credentials: false
+
+      - name: Install Rust
+        run: rustup update stable
+
+      - name: 'Format'
+        run: cargo fmt --check

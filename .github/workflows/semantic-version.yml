@@ -1,0 +1,42 @@
+name: 'Semantic Version'
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  publish:
+    name: Release
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      issues: write
+      pull-requests: write
+      id-token: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.PAT }}
+
+      - name: Install Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 20
+
+      - uses: pnpm/action-setup@v2
+        with:
+          version: 8
+          run_install: true
+
+      - name: Release
+        env:
+          GIT_AUTHOR_NAME: 'Bot'
+          GIT_AUTHOR_EMAIL: 'bot@gorules.io'
+          GIT_COMMITTER_NAME: 'Bot'
+          GIT_COMMITTER_EMAIL: 'bot@gorules.io'
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: pnpm semantic-release
