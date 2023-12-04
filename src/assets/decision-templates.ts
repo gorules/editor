@@ -870,5 +870,5 @@ export const decisionTemplates: Record<string, DecisionContent> = {
         targetId: '71285ae0-45cf-4300-afe7-de39e0f81590',
       },
     ],
-  }
+  },
 };
