@@ -1,3 +1,15 @@
+# [1.1.0](https://github.com/gorules/editor/compare/v1.0.0...v1.1.0) (2023-12-12)
+
+
+### Bug Fixes
+
+* lint ([0c72fd3](https://github.com/gorules/editor/commit/0c72fd37ba07332c95c902b63dc6c060dfaedf06))
+
+
+### Features
+
+* update zen-engine ([f4a0c90](https://github.com/gorules/editor/commit/f4a0c90c48f33d6dc07a04b91c370fa1ca427909))
+
 # 1.0.0 (2023-12-04)
 
 
