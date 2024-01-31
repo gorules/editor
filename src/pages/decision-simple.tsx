@@ -379,8 +379,16 @@ export const DecisionSimplePage: React.FC = () => {
 
                   return { result: data };
                 } catch (e) {
-                  displayError(e);
-                  return { error: e };
+                  if (axios.isAxiosError(e)) {
+                    return {
+                      error: {
+                        message: e.response?.data?.source,
+                        data: e.response?.data,
+                      },
+                    };
+                  }
+
+                  return { error: { message: 'Simulation failed' } };
                 }
               }}
             />
