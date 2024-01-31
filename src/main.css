@@ -5,3 +5,11 @@ body {
 .grl-dn__header__icon {
     box-sizing: content-box;
 }
+
+body[theme="dark"] {
+    background: black;
+}
+
+body[theme="light"] {
+    background: white;
+}

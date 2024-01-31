@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Button, Dropdown, message, Modal, Typography } from 'antd';
-import { PlayCircleOutlined } from '@ant-design/icons';
+import { Button, Dropdown, message, Modal, theme, Typography } from 'antd';
+import { BulbOutlined, CheckOutlined, PlayCircleOutlined } from '@ant-design/icons';
 import { decisionTemplates } from '../assets/decision-templates';
 import { displayError } from '../helpers/error-message.ts';
 import { DecisionContent, DecisionEdge, DecisionNode } from '../helpers/graph.ts';
@@ -14,6 +14,7 @@ import { match, P } from 'ts-pattern';
 
 import classes from './decision-simple.module.css';
 import axios from 'axios';
+import { ThemePreference, useTheme } from '../context/theme.provider.tsx';
 
 enum DocumentFileTypes {
   Decision = 'application/vnd.gorules.decision',
@@ -22,13 +23,14 @@ enum DocumentFileTypes {
 const supportFSApi = Object.hasOwn(window, 'showSaveFilePicker');
 
 export const DecisionSimplePage: React.FC = () => {
+  const { token } = theme.useToken();
   const fileInput = useRef<HTMLInputElement>(null);
   const graphRef = React.useRef<DecisionGraphRef>(null);
+  const { themePreference, setThemePreference } = useTheme();
 
   const [searchParams] = useSearchParams();
   const [fileHandle, setFileHandle] = useState<FileSystemFileHandle>();
   const [simulatorOpened, setSimulatorOpened] = useState(false);
-  const [editGraph, setEditGraph] = useState(false);
   const [graph, setGraph] = useState<DecisionContent>({ nodes: [], edges: [] });
   const [fileName, setFileName] = useState('Name');
 
@@ -240,7 +242,12 @@ export const DecisionSimplePage: React.FC = () => {
       />
       <div className={classes.page}>
         <PageHeader
-          style={{ padding: '8px 16px', background: 'white', marginBottom: 8, boxSizing: 'border-box' }}
+          style={{
+            padding: '8px 16px',
+            background: token.colorBgLayout,
+            boxSizing: 'border-box',
+            borderBottom: `1px solid ${token.colorBorder}`,
+          }}
           title={
             <div className={classes.heading}>
               <div className={classes.logo}>
@@ -308,16 +315,51 @@ export const DecisionSimplePage: React.FC = () => {
           }
           ghost={false}
           extra={[
-            !editGraph && (
-              <Button
-                type={simulatorOpened ? 'primary' : 'default'}
-                ghost={simulatorOpened}
-                icon={<PlayCircleOutlined />}
-                onClick={() => graphRef.current?.toggleSimulator()}
-              >
-                {simulatorOpened ? 'Close' : 'Open'} Simulator
-              </Button>
-            ),
+            <Button
+              type={simulatorOpened ? 'primary' : 'default'}
+              ghost={simulatorOpened}
+              icon={<PlayCircleOutlined />}
+              onClick={() => graphRef.current?.toggleSimulator()}
+            >
+              {simulatorOpened ? 'Close' : 'Open'} Simulator
+            </Button>,
+            <Dropdown
+              overlayStyle={{ minWidth: 150 }}
+              menu={{
+                onClick: ({ key }) => setThemePreference(key as ThemePreference),
+                items: [
+                  {
+                    label: 'Automatic',
+                    key: ThemePreference.Automatic,
+                    icon: (
+                      <CheckOutlined
+                        style={{ visibility: themePreference === ThemePreference.Automatic ? 'visible' : 'hidden' }}
+                      />
+                    ),
+                  },
+                  {
+                    label: 'Dark',
+                    key: ThemePreference.Dark,
+                    icon: (
+                      <CheckOutlined
+                        style={{ visibility: themePreference === ThemePreference.Dark ? 'visible' : 'hidden' }}
+                      />
+                    ),
+                  },
+                  {
+                    label: 'Light',
+                    key: ThemePreference.Light,
+                    icon: (
+                      <CheckOutlined
+                        style={{ visibility: themePreference === ThemePreference.Light ? 'visible' : 'hidden' }}
+                      />
+                    ),
+                  },
+                ],
+              }}
+            >
+              <Button type="text" icon={<BulbOutlined />} />
+            </Dropdown>,
           ]}
         />
         <div className={classes.contentWrapper}>
@@ -326,7 +368,6 @@ export const DecisionSimplePage: React.FC = () => {
               ref={graphRef}
               value={graph}
               onChange={(value) => setGraph(value)}
-              onEditGraph={(val) => setEditGraph(val || false)}
               reactFlowProOptions={{ hideAttribution: true }}
               onSimulatorOpen={setSimulatorOpened}
               onSimulationRun={async ({ decisionGraph, context }) => {
@@ -342,7 +383,6 @@ export const DecisionSimplePage: React.FC = () => {
                   return { error: e };
                 }
               }}
-              hideExportImport
             />
           </div>
         </div>

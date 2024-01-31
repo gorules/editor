@@ -33,7 +33,6 @@
     overflow-y: auto;
     display: flex;
     gap: 8px;
-    max-height: calc(100vh - 80px);
 }
 
 .content {

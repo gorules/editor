@@ -16,9 +16,9 @@ import 'ace-builds/src-noconflict/snippets/javascript';
 import 'ace-builds/src-noconflict/theme-chrome';
 
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-import { JdmConfigProvider } from '@gorules/jdm-editor';
 import { DecisionSimplePage } from './pages/decision-simple.tsx';
 import { NotFoundPage } from './pages/not-found';
+import { ThemeContextProvider } from './context/theme.provider.tsx';
 
 const router = createBrowserRouter([
   {
@@ -33,8 +33,8 @@ const router = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
-    <JdmConfigProvider>
+    <ThemeContextProvider>
       <RouterProvider router={router} />
-    </JdmConfigProvider>
+    </ThemeContextProvider>
   </React.StrictMode>,
 );
