@@ -1,3 +1,10 @@
+# [1.2.0](https://github.com/gorules/editor/compare/v1.1.0...v1.2.0) (2024-01-31)
+
+
+### Features
+
+* upgrade gorules editor ([7e3f0bd](https://github.com/gorules/editor/commit/7e3f0bd840f23d24045a55f4c7b04e5b16afbe4b))
+
 # [1.1.0](https://github.com/gorules/editor/compare/v1.0.0...v1.1.0) (2023-12-12)
 
 
