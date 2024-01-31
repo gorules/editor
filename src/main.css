@@ -1,3 +1,7 @@
 body {
     margin: 0;
 }
+
+.grl-dn__header__icon {
+    box-sizing: content-box;
+}
