@@ -1,21 +1,19 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Button, Dropdown, message, Modal, Typography } from 'antd';
-import { Simulator } from '../components/simulator';
 import { PlayCircleOutlined } from '@ant-design/icons';
-import axios from 'axios';
 import { decisionTemplates } from '../assets/decision-templates';
 import { displayError } from '../helpers/error-message.ts';
 import { DecisionContent, DecisionEdge, DecisionNode } from '../helpers/graph.ts';
 import { useSearchParams } from 'react-router-dom';
-import { DecisionGraph } from '@gorules/jdm-editor';
+import { DecisionGraph, DecisionGraphRef } from '@gorules/jdm-editor';
 import { PageHeader } from '../components/page-header.tsx';
 import { DirectedGraph } from 'graphology';
 import { hasCycle } from 'graphology-dag';
 import { Stack } from '../components/stack.tsx';
 import { match, P } from 'ts-pattern';
-import { GraphRef } from '@gorules/jdm-editor/dist/components/decision-graph/graph/graph';
 
 import classes from './decision-simple.module.css';
+import axios from 'axios';
 
 enum DocumentFileTypes {
   Decision = 'application/vnd.gorules.decision',
@@ -25,7 +23,7 @@ const supportFSApi = Object.hasOwn(window, 'showSaveFilePicker');
 
 export const DecisionSimplePage: React.FC = () => {
   const fileInput = useRef<HTMLInputElement>(null);
-  const graphRef = React.useRef<GraphRef>(null);
+  const graphRef = React.useRef<DecisionGraphRef>(null);
 
   const [searchParams] = useSearchParams();
   const [fileHandle, setFileHandle] = useState<FileSystemFileHandle>();
@@ -33,9 +31,6 @@ export const DecisionSimplePage: React.FC = () => {
   const [editGraph, setEditGraph] = useState(false);
   const [graph, setGraph] = useState<DecisionContent>({ nodes: [], edges: [] });
   const [fileName, setFileName] = useState('Name');
-
-  const [simulateData, setSimulateData] = useState<unknown>(null);
-  const [simulateLoading, setSimulateLoading] = useState(false);
 
   useEffect(() => {
     const templateParam = searchParams.get('template');
@@ -51,24 +46,6 @@ export const DecisionSimplePage: React.FC = () => {
 
     if (templateGraph) {
       setGraph(templateGraph);
-    }
-  };
-
-  const simulate = async (payload: { context: unknown; graph: DecisionContent }) => {
-    setSimulateData(null);
-    setSimulateLoading(true);
-
-    try {
-      const { data } = await axios.post('/api/simulate', {
-        context: payload.context,
-        content: payload.graph,
-      });
-
-      setSimulateData(data);
-    } catch (e) {
-      displayError(e);
-    } finally {
-      setSimulateLoading(false);
     }
   };
 
@@ -336,7 +313,7 @@ export const DecisionSimplePage: React.FC = () => {
                 type={simulatorOpened ? 'primary' : 'default'}
                 ghost={simulatorOpened}
                 icon={<PlayCircleOutlined />}
-                onClick={() => setSimulatorOpened(!simulatorOpened)}
+                onClick={() => graphRef.current?.toggleSimulator()}
               >
                 {simulatorOpened ? 'Close' : 'Open'} Simulator
               </Button>
@@ -350,37 +327,24 @@ export const DecisionSimplePage: React.FC = () => {
               value={graph}
               onChange={(value) => setGraph(value)}
               onEditGraph={(val) => setEditGraph(val || false)}
-              simulate={{ result: simulateData }}
               reactFlowProOptions={{ hideAttribution: true }}
+              onSimulatorOpen={setSimulatorOpened}
+              onSimulationRun={async ({ decisionGraph, context }) => {
+                try {
+                  const { data } = await axios.post('/api/simulate', {
+                    context,
+                    content: decisionGraph,
+                  });
+
+                  return { result: data };
+                } catch (e) {
+                  displayError(e);
+                  return { error: e };
+                }
+              }}
               hideExportImport
             />
           </div>
-          {simulatorOpened && (
-            <div
-              style={{
-                width: 400,
-                height: '100%',
-                background: 'white',
-                display: editGraph ? 'none' : 'block',
-              }}
-            >
-              <div
-                style={{
-                  height: '100%',
-                  background: 'white',
-                }}
-              >
-                <Simulator
-                  simulate={simulate}
-                  resetSimulateData={() => setSimulateData(null)}
-                  simulateData={simulateData}
-                  loading={simulateLoading}
-                  graph={graph}
-                  onDismiss={() => setSimulatorOpened(false)}
-                />
-              </div>
-            </div>
-          )}
         </div>
       </div>
     </>
