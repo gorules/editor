@@ -6,10 +6,10 @@ body {
     box-sizing: content-box;
 }
 
-body[theme="dark"] {
+body[data-theme="dark"] {
     background: black;
 }
 
-body[theme="light"] {
+body[data-theme="light"] {
     background: white;
 }
