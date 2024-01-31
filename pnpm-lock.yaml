@@ -9,8 +9,8 @@ dependencies:
     specifier: ^5.2.6
     version: 5.2.6(react-dom@18.2.0)(react@18.2.0)
   '@gorules/jdm-editor':
-    specifier: 1.0.0-beta.3
-    version: 1.0.0-beta.3(@types/node@20.10.1)(@types/react@18.2.39)(graphology-types@0.24.7)(react-dom@18.2.0)(react@18.2.0)
+    specifier: 1.0.0-beta.5
+    version: 1.0.0-beta.5(@types/node@20.10.1)(@types/react@18.2.39)(graphology-types@0.24.7)(react-dom@18.2.0)(react@18.2.0)
   ace-builds:
     specifier: ^1.31.2
     version: 1.31.2
@@ -493,8 +493,8 @@ packages:
     engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
     dev: true
 
-  /@gorules/jdm-editor@1.0.0-beta.3(@types/node@20.10.1)(@types/react@18.2.39)(graphology-types@0.24.7)(react-dom@18.2.0)(react@18.2.0):
-    resolution: {integrity: sha512-ObBPj+vtWNKLCR9NRfE240KiFm+qWMC//pF01D+3dE646nbj0L3Sq6kJgtWrzEgQ8PSNdyq1cZnLsnLcSCA8Ow==}
+  /@gorules/jdm-editor@1.0.0-beta.5(@types/node@20.10.1)(@types/react@18.2.39)(graphology-types@0.24.7)(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-euWQ8b043m1aZJdndwaJhQtei2Ygs+QVhHipZ/ss3SvmJ/6Bi7lQhFOsXQTiSCYIJ1AShuzVSW32Yj+Za+/jEg==}
     peerDependencies:
       react: '>= 18'
       react-dom: '>= 18'

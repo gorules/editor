@@ -8,6 +8,6 @@ module.exports = {
   rules: {
     'prettier/prettier': 'error',
     'react-refresh/only-export-components': ['warn', { allowConstantExport: true }],
-    'react-hooks/exhaustive-deps': 'off'
+    'react-hooks/exhaustive-deps': 'off',
   },
 };
