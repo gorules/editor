@@ -1,3 +1,10 @@
+## [1.3.1](https://github.com/gorules/editor/compare/v1.3.0...v1.3.1) (2024-01-31)
+
+
+### Bug Fixes
+
+* display errors ([6517ff0](https://github.com/gorules/editor/commit/6517ff019db8e8dcaea017e9fc57af0327116449))
+
 # [1.3.0](https://github.com/gorules/editor/compare/v1.2.0...v1.3.0) (2024-01-31)
 
 
