@@ -1,3 +1,17 @@
+# [1.3.0](https://github.com/gorules/editor/compare/v1.2.0...v1.3.0) (2024-01-31)
+
+
+### Bug Fixes
+
+* css ([1609cc0](https://github.com/gorules/editor/commit/1609cc04409f55e15d49361d392cdf85c86c9eff))
+* lint ([56348a4](https://github.com/gorules/editor/commit/56348a4e0f467db34a1be0ef1f96f9bb4afcdad1))
+* lint ([f2956c9](https://github.com/gorules/editor/commit/f2956c99dd9d21db83b8cbcd877363d9d66a486f))
+
+
+### Features
+
+* add dark mode ([e39afe7](https://github.com/gorules/editor/commit/e39afe7e98dbfa8e60b992542e83f20ac32c3e57))
+
 # [1.2.0](https://github.com/gorules/editor/compare/v1.1.0...v1.2.0) (2024-01-31)
 
 
