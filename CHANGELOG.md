@@ -1,3 +1,10 @@
+## [1.3.2](https://github.com/gorules/editor/compare/v1.3.1...v1.3.2) (2024-02-02)
+
+
+### Bug Fixes
+
+* version bump ([#7](https://github.com/gorules/editor/issues/7)) ([03128fc](https://github.com/gorules/editor/commit/03128fcf78f2d9f7fdfc696b97387508e8c01b34))
+
 ## [1.3.1](https://github.com/gorules/editor/compare/v1.3.0...v1.3.1) (2024-01-31)
 
 
