@@ -49,7 +49,8 @@ async fn main() {
 
     tracing::info!("🚀 Listening on http://{}", listener.local_addr().unwrap());
 
-    let mut app_with_layers = app.layer(TraceLayer::new_for_http())
+    let mut app_with_layers = app
+        .layer(TraceLayer::new_for_http())
         .layer(compression_layer);
     if let Ok(_) = env::var("CORS_PERMISSIVE") {
         app_with_layers = app_with_layers.layer(CorsLayer::permissive())
