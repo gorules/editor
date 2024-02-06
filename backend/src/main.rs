@@ -10,6 +10,7 @@ use serde::{Deserialize, Serialize};
 use serde_json::Value;
 use tokio::runtime::Handle;
 use tower_http::compression::CompressionLayer;
+use tower_http::cors::CorsLayer;
 use tower_http::services::{ServeDir, ServeFile};
 use tower_http::set_status::SetStatus;
 use tower_http::trace::TraceLayer;
@@ -47,13 +48,14 @@ async fn main() {
     let compression_layer = CompressionLayer::new().gzip(true).br(true);
 
     tracing::info!("🚀 Listening on http://{}", listener.local_addr().unwrap());
-    axum::serve(
-        listener,
-        app.layer(TraceLayer::new_for_http())
-            .layer(compression_layer),
-    )
-    .await
-    .unwrap();
+
+    let mut app_with_layers = app.layer(TraceLayer::new_for_http())
+        .layer(compression_layer);
+    if let Ok(_) = env::var("CORS_PERMISSIVE") {
+        app_with_layers = app_with_layers.layer(CorsLayer::permissive())
+    }
+
+    axum::serve(listener, app_with_layers).await.unwrap();
 }
 
 fn serve_dir_service() -> ServeDir<SetStatus<ServeFile>> {
