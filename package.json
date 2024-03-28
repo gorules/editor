@@ -14,7 +14,7 @@
   },
   "dependencies": {
     "@ant-design/icons": "^5.2.6",
-    "@gorules/jdm-editor": "1.0.1",
+    "@gorules/jdm-editor": "1.0.3",
     "ace-builds": "^1.31.2",
     "antd": "^5.11.5",
     "axios": "^1.6.2",

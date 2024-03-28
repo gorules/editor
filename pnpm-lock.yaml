@@ -9,8 +9,8 @@ dependencies:
     specifier: ^5.2.6
     version: 5.2.6(react-dom@18.2.0)(react@18.2.0)
   '@gorules/jdm-editor':
-    specifier: 1.0.1
-    version: 1.0.1(@types/node@20.10.1)(@types/react@18.2.39)(graphology-types@0.24.7)(react-dom@18.2.0)(react@18.2.0)
+    specifier: 1.0.3
+    version: 1.0.3(@types/node@20.10.1)(@types/react@18.2.39)(graphology-types@0.24.7)(react-dom@18.2.0)(react@18.2.0)
   ace-builds:
     specifier: ^1.31.2
     version: 1.31.2
@@ -493,8 +493,8 @@ packages:
     engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
     dev: true
 
-  /@gorules/jdm-editor@1.0.1(@types/node@20.10.1)(@types/react@18.2.39)(graphology-types@0.24.7)(react-dom@18.2.0)(react@18.2.0):
-    resolution: {integrity: sha512-CqRbRbNbemRsHJAH0vlA+tlz8EMg8dHeBsZUvG+MqyRt+zpwg8z943xkxYCYQYLH573ZxlygylQnjVoD75Dbag==}
+  /@gorules/jdm-editor@1.0.3(@types/node@20.10.1)(@types/react@18.2.39)(graphology-types@0.24.7)(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-8qTuatIjd++b1oXZrAz8NqGq2U/VqGnpHdbSgn5RKJjeq7lOtZleG6gpG71dav2zt5ckRfScMhGpafEPFF/LbQ==}
     peerDependencies:
       react: '>= 18'
       react-dom: '>= 18'
@@ -503,7 +503,7 @@ packages:
       '@ant-design/icons': 5.2.6(react-dom@18.2.0)(react@18.2.0)
       '@monaco-editor/react': 4.6.0(monaco-editor@0.45.0)(react-dom@18.2.0)(react@18.2.0)
       '@tanstack/react-table': 8.11.7(react-dom@18.2.0)(react@18.2.0)
-      '@tanstack/react-virtual': 3.0.2(react-dom@18.2.0)(react@18.2.0)
+      '@tanstack/react-virtual': 3.2.0(react-dom@18.2.0)(react@18.2.0)
       ace-builds: 1.32.5
       antd: 5.13.3(react-dom@18.2.0)(react@18.2.0)
       clsx: 2.1.0
@@ -1358,13 +1358,13 @@ packages:
       react-dom: 18.2.0(react@18.2.0)
     dev: false
 
-  /@tanstack/react-virtual@3.0.2(react-dom@18.2.0)(react@18.2.0):
-    resolution: {integrity: sha512-9XbRLPKgnhMwwmuQMnJMv+5a9sitGNCSEtf/AZXzmJdesYk7XsjYHaEDny+IrJzvPNwZliIIDwCRiaUqR3zzCA==}
+  /@tanstack/react-virtual@3.2.0(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-OEdMByf2hEfDa6XDbGlZN8qO6bTjlNKqjM3im9JG+u3mCL8jALy0T/67oDI001raUUPh1Bdmfn4ZvPOV5knpcg==}
     peerDependencies:
       react: ^16.8.0 || ^17.0.0 || ^18.0.0
       react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0
     dependencies:
-      '@tanstack/virtual-core': 3.0.0
+      '@tanstack/virtual-core': 3.2.0
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
     dev: false
@@ -1374,8 +1374,8 @@ packages:
     engines: {node: '>=12'}
     dev: false
 
-  /@tanstack/virtual-core@3.0.0:
-    resolution: {integrity: sha512-SYXOBTjJb05rXa2vl55TTwO40A6wKu0R5i1qQwhJYNDIqaIGF7D0HsLw+pJAyi2OvntlEIVusx3xtbbgSUi6zg==}
+  /@tanstack/virtual-core@3.2.0:
+    resolution: {integrity: sha512-P5XgYoAw/vfW65byBbJQCw+cagdXDT/qH6wmABiLt4v4YBT2q2vqCOhihe+D1Nt325F/S/0Tkv6C5z0Lv+VBQQ==}
     dev: false
 
   /@types/base16@1.0.5:
