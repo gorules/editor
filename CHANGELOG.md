@@ -1,3 +1,10 @@
+## [1.4.4](https://github.com/gorules/editor/compare/v1.4.3...v1.4.4) (2024-03-29)
+
+
+### Bug Fixes
+
+* bump jdm-edtior ([3273363](https://github.com/gorules/editor/commit/3273363deb70550e45f4cafb67aadc2ad9aeec79))
+
 ## [1.4.3](https://github.com/gorules/editor/compare/v1.4.2...v1.4.3) (2024-03-28)
 
 
