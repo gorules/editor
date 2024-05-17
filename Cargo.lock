@@ -784,6 +784,18 @@ dependencies = [
 ]
 
 [[package]]
+name = "json_dotpath"
+version = "1.1.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "dbdcfef3cf5591f0cef62da413ae795e3d1f5a00936ccec0b2071499a32efd1a"
+dependencies = [
+ "serde",
+ "serde_derive",
+ "serde_json",
+ "thiserror",
+]
+
+[[package]]
 name = "lazy_static"
 version = "1.4.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -1939,9 +1951,9 @@ dependencies = [
 
 [[package]]
 name = "zen-engine"
-version = "0.19.0"
+version = "0.21.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "dbd1136a7668a8a88162a6484c6840f7b369ff10cc49a305dc7aa707540aff74"
+checksum = "eafb69f5ec588237aab5e1bccca8217eb0a41a23d649578f0aca7635cba91957"
 dependencies = [
  "anyhow",
  "async-recursion",
@@ -1949,6 +1961,7 @@ dependencies = [
  "fixedbitset",
  "futures",
  "itertools",
+ "json_dotpath",
  "once_cell",
  "petgraph",
  "rquickjs",
@@ -1956,13 +1969,14 @@ dependencies = [
  "serde_json",
  "thiserror",
  "zen-expression",
+ "zen-tmpl",
 ]
 
 [[package]]
 name = "zen-expression"
-version = "0.19.0"
+version = "0.21.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "90b073bbc971f25882b665f26db585578c31f75482303340aa0515e8e2d278e2"
+checksum = "bbbd41392fbe817ffd4973af34584ecc32c0b9e1507bae4712677c692044308d"
 dependencies = [
  "ahash 0.8.6",
  "bumpalo",
@@ -1980,6 +1994,19 @@ dependencies = [
  "strum",
  "strum_macros",
  "thiserror",
+]
+
+[[package]]
+name = "zen-tmpl"
+version = "0.21.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "b736e51bd442661c7c264458f30dadab9aecd911cad8698e57359f194bf33d0b"
+dependencies = [
+ "itertools",
+ "serde",
+ "serde_json",
+ "thiserror",
+ "zen-expression",
 ]
 
 [[package]]

@@ -1,11 +1,11 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Button, Dropdown, message, Modal, theme, Typography } from 'antd';
-import { BulbOutlined, CheckOutlined, PlayCircleOutlined } from '@ant-design/icons';
+import { Button, Divider, Dropdown, message, Modal, theme, Typography } from 'antd';
+import { BulbOutlined, CheckOutlined, EditOutlined, PlayCircleOutlined } from '@ant-design/icons';
 import { decisionTemplates } from '../assets/decision-templates';
 import { displayError } from '../helpers/error-message.ts';
 import { DecisionContent, DecisionEdge, DecisionNode } from '../helpers/graph.ts';
 import { useSearchParams } from 'react-router-dom';
-import { DecisionGraph, DecisionGraphRef } from '@gorules/jdm-editor';
+import { DecisionGraph, DecisionGraphRef, GraphSimulator, Simulation } from '@gorules/jdm-editor';
 import { PageHeader } from '../components/page-header.tsx';
 import { DirectedGraph } from 'graphology';
 import { hasCycle } from 'graphology-dag';
@@ -32,7 +32,8 @@ export const DecisionSimplePage: React.FC = () => {
   const [fileHandle, setFileHandle] = useState<FileSystemFileHandle>();
   const [simulatorOpened, setSimulatorOpened] = useState(false);
   const [graph, setGraph] = useState<DecisionContent>({ nodes: [], edges: [] });
-  const [fileName, setFileName] = useState('Name');
+  const [fileName, setFileName] = useState('Untitled Decision');
+  const [graphTrace, setGraphTrace] = useState<Simulation>();
 
   useEffect(() => {
     const templateParam = searchParams.get('template');
@@ -243,26 +244,31 @@ export const DecisionSimplePage: React.FC = () => {
       <div className={classes.page}>
         <PageHeader
           style={{
-            padding: '8px 16px',
+            padding: '8px',
             background: token.colorBgLayout,
             boxSizing: 'border-box',
             borderBottom: `1px solid ${token.colorBorder}`,
           }}
           title={
             <div className={classes.heading}>
-              <div className={classes.logo}>
-                <img height={48} width={48} src={'/favicon.svg'} />
-              </div>
+              <Button
+                type="text"
+                target="_blank"
+                href="https://gorules.io"
+                icon={<img height={24} width={24} src={'/favicon.svg'} />}
+              />
+              <Divider type="vertical" style={{ margin: 0 }} />
               <div className={classes.headingContent}>
                 <Typography.Title
                   level={4}
-                  style={{ margin: 0 }}
+                  style={{ margin: 0, fontWeight: 400 }}
                   className={classes.headingTitle}
                   editable={{
-                    onChange: (value) => setFileName(value.trim()),
                     text: fileName,
                     maxLength: 24,
                     autoSize: { maxRows: 1 },
+                    onChange: (value) => setFileName(value.trim()),
+                    triggerType: ['text'],
                   }}
                 >
                   {fileName}
@@ -315,14 +321,6 @@ export const DecisionSimplePage: React.FC = () => {
           }
           ghost={false}
           extra={[
-            <Button
-              type={simulatorOpened ? 'primary' : 'default'}
-              ghost={simulatorOpened}
-              icon={<PlayCircleOutlined />}
-              onClick={() => graphRef.current?.toggleSimulator()}
-            >
-              {simulatorOpened ? 'Close' : 'Open'} Simulator
-            </Button>,
             <Dropdown
               overlayStyle={{ minWidth: 150 }}
               menu={{
@@ -369,28 +367,38 @@ export const DecisionSimplePage: React.FC = () => {
               value={graph}
               onChange={(value) => setGraph(value)}
               reactFlowProOptions={{ hideAttribution: true }}
-              onSimulatorOpen={setSimulatorOpened}
-              onSimulationRun={async ({ decisionGraph, context }) => {
-                try {
-                  const { data } = await axios.post('/api/simulate', {
-                    context,
-                    content: decisionGraph,
-                  });
+              simulate={graphTrace}
+              panels={[
+                {
+                  id: 'simulator',
+                  title: 'Simulator',
+                  icon: <PlayCircleOutlined />,
+                  renderPanel: () => (
+                    <GraphSimulator
+                      onClear={() => setGraphTrace(undefined)}
+                      onRun={async ({ graph, context }) => {
+                        try {
+                          const { data } = await axios.post('/api/simulate', {
+                            context,
+                            content: graph,
+                          });
 
-                  return { result: data };
-                } catch (e) {
-                  if (axios.isAxiosError(e)) {
-                    return {
-                      error: {
-                        message: e.response?.data?.source,
-                        data: e.response?.data,
-                      },
-                    };
-                  }
-
-                  return { error: { message: 'Simulation failed' } };
-                }
-              }}
+                          setGraphTrace({ result: data });
+                        } catch (e) {
+                          if (axios.isAxiosError(e)) {
+                            setGraphTrace({
+                              error: {
+                                message: e.response?.data?.source,
+                                data: e.response?.data,
+                              },
+                            });
+                          }
+                        }
+                      }}
+                    />
+                  ),
+                },
+              ]}
             />
           </div>
         </div>
