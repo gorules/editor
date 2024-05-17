@@ -20,9 +20,7 @@ export const PageHeader: React.FC<PageHeaderProps> = ({ title, subTitle, extra, 
       <Stack horizontal horizontalAlign="space-between" verticalAlign="center">
         <Stack horizontal gap={12} verticalAlign="center">
           {onBack && <Button type="text" icon={<LeftOutlined />} onClick={onBack} />}
-          <Typography.Title style={{ margin: 0 }} level={3}>
-            {title}
-          </Typography.Title>
+          {title}
           {subTitle && (
             <Typography.Text type="secondary" style={{ margin: 0 }}>
               {subTitle}
