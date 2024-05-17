@@ -1,3 +1,10 @@
+# [1.5.0](https://github.com/gorules/editor/compare/v1.4.4...v1.5.0) (2024-05-17)
+
+
+### Features
+
+* update jdm editor ([9b370ef](https://github.com/gorules/editor/commit/9b370efe40a7dc4f2bb30bb9a38334cd2a708edf))
+
 ## [1.4.4](https://github.com/gorules/editor/compare/v1.4.3...v1.4.4) (2024-03-29)
 
 
