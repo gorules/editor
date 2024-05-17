@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Button, Divider, Dropdown, message, Modal, theme, Typography } from 'antd';
-import { BulbOutlined, CheckOutlined, EditOutlined, PlayCircleOutlined } from '@ant-design/icons';
+import { BulbOutlined, CheckOutlined, PlayCircleOutlined } from '@ant-design/icons';
 import { decisionTemplates } from '../assets/decision-templates';
 import { displayError } from '../helpers/error-message.ts';
 import { DecisionContent, DecisionEdge, DecisionNode } from '../helpers/graph.ts';
@@ -30,7 +30,6 @@ export const DecisionSimplePage: React.FC = () => {
 
   const [searchParams] = useSearchParams();
   const [fileHandle, setFileHandle] = useState<FileSystemFileHandle>();
-  const [simulatorOpened, setSimulatorOpened] = useState(false);
   const [graph, setGraph] = useState<DecisionContent>({ nodes: [], edges: [] });
   const [fileName, setFileName] = useState('Untitled Decision');
   const [graphTrace, setGraphTrace] = useState<Simulation>();
