@@ -1,3 +1,10 @@
+## [1.5.1](https://github.com/gorules/editor/compare/v1.5.0...v1.5.1) (2024-05-17)
+
+
+### Bug Fixes
+
+* update docker version ([57794c1](https://github.com/gorules/editor/commit/57794c1ff7b3a2dd876aae3746c907c097937c6e))
+
 # [1.5.0](https://github.com/gorules/editor/compare/v1.4.4...v1.5.0) (2024-05-17)
 
 
