@@ -1,3 +1,10 @@
+# [1.6.0](https://github.com/gorules/editor/compare/v1.5.1...v1.6.0) (2024-07-05)
+
+
+### Features
+
+* upgrade zen v0.23 ([#11](https://github.com/gorules/editor/issues/11)) ([ed1db4e](https://github.com/gorules/editor/commit/ed1db4e9844a45abd76ba8fd50123d0a0cb4d5a6))
+
 ## [1.5.1](https://github.com/gorules/editor/compare/v1.5.0...v1.5.1) (2024-05-17)
 
 
