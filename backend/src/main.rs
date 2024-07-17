@@ -1,6 +1,3 @@
-use std::env;
-use std::path::Path;
-use std::thread::available_parallelism;
 use axum::extract::DefaultBodyLimit;
 use axum::http::StatusCode;
 use axum::response::{IntoResponse, Response};
@@ -8,6 +5,9 @@ use axum::routing::{get, post};
 use axum::{Extension, Json, Router};
 use serde::{Deserialize, Serialize};
 use serde_json::Value;
+use std::env;
+use std::path::Path;
+use std::thread::available_parallelism;
 use tokio::runtime::Handle;
 use tokio_util::task::LocalPoolHandle;
 use tower_http::compression::CompressionLayer;
@@ -90,15 +90,20 @@ async fn simulate(
     let engine = DecisionEngine::default();
     let decision = engine.create_decision(payload.content.into());
 
-    let result = local_pool.spawn_pinned(move || async move {
-        decision.evaluate_with_opts(
-            &payload.context,
-            EvaluationOptions {
-                trace: Some(true),
-                max_depth: None,
-            },
-        ).await
-    }).await.expect("Thread failed to join")?;
+    let result = local_pool
+        .spawn_pinned(move || async move {
+            decision
+                .evaluate_with_opts(
+                    &payload.context,
+                    EvaluationOptions {
+                        trace: Some(true),
+                        max_depth: None,
+                    },
+                )
+                .await
+        })
+        .await
+        .expect("Thread failed to join")?;
 
     return Ok(Json(result));
 }
