@@ -1,3 +1,11 @@
+## [1.7.1](https://github.com/gorules/editor/compare/v1.7.0...v1.7.1) (2024-07-17)
+
+
+### Bug Fixes
+
+* format ([be5e5c3](https://github.com/gorules/editor/commit/be5e5c3f0565d9853405c2ed5d77ea8961ee7e7e))
+* patch quickjs ([f26fc18](https://github.com/gorules/editor/commit/f26fc186676356e13c93f47787b0cb676fcf8b37))
+
 # [1.7.0](https://github.com/gorules/editor/compare/v1.6.0...v1.7.0) (2024-07-17)
 
 
