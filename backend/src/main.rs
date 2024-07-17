@@ -1,14 +1,15 @@
 use std::env;
 use std::path::Path;
-
+use std::thread::available_parallelism;
 use axum::extract::DefaultBodyLimit;
 use axum::http::StatusCode;
 use axum::response::{IntoResponse, Response};
 use axum::routing::{get, post};
-use axum::{Json, Router};
+use axum::{Extension, Json, Router};
 use serde::{Deserialize, Serialize};
 use serde_json::Value;
 use tokio::runtime::Handle;
+use tokio_util::task::LocalPoolHandle;
 use tower_http::compression::CompressionLayer;
 use tower_http::cors::CorsLayer;
 use tower_http::services::{ServeDir, ServeFile};
@@ -23,6 +24,8 @@ const IS_DEVELOPMENT: bool = cfg!(debug_assertions);
 
 #[tokio::main]
 async fn main() {
+    let local_pool = LocalPoolHandle::new(available_parallelism().map(Into::into).unwrap_or(1));
+
     tracing_subscriber::registry()
         .with(
             tracing_subscriber::EnvFilter::try_from_default_env()
@@ -40,6 +43,7 @@ async fn main() {
             "/api/simulate",
             post(simulate).layer(DefaultBodyLimit::max(16 * 1024 * 1024)),
         )
+        .layer(Extension(local_pool))
         .nest_service("/", serve_dir_service());
 
     let listener = tokio::net::TcpListener::bind(listener_address)
@@ -80,21 +84,21 @@ struct SimulateRequest {
 }
 
 async fn simulate(
+    Extension(local_pool): Extension<LocalPoolHandle>,
     Json(payload): Json<SimulateRequest>,
 ) -> Result<Json<DecisionGraphResponse>, SimulateError> {
     let engine = DecisionEngine::default();
     let decision = engine.create_decision(payload.content.into());
-    let result = tokio::task::spawn_blocking(move || {
-        Handle::current().block_on(decision.evaluate_with_opts(
+
+    let result = local_pool.spawn_pinned(move || async move {
+        decision.evaluate_with_opts(
             &payload.context,
             EvaluationOptions {
                 trace: Some(true),
                 max_depth: None,
             },
-        ))
-    })
-    .await
-    .unwrap()?;
+        ).await
+    }).await.expect("Thread failed to join")?;
 
     return Ok(Json(result));
 }
