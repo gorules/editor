@@ -1,3 +1,6 @@
 [workspace]
 resolver = "2"
 members = ["backend"]
+
+[patch.crates-io]
+rquickjs-core = { git = "https://github.com/stefan-gorules/rquickjs.git", branch = "master" }

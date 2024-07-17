@@ -1410,8 +1410,7 @@ dependencies = [
 [[package]]
 name = "rquickjs-core"
 version = "0.6.2"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "2e9129d69b7b8f7ee8ad1da5b12c7f4a8a8acd45f2e6dd9cb2ee1bc5a1f2fa3d"
+source = "git+https://github.com/stefan-gorules/rquickjs.git?branch=master#63f81680790a352925aded332eff21ef3cf19570"
 dependencies = [
  "async-lock",
  "either",
@@ -1440,8 +1439,7 @@ dependencies = [
 [[package]]
 name = "rquickjs-sys"
 version = "0.6.2"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "bf6f2288d8e7fbb5130f62cf720451641e99d55f6fde9db86aa2914ecb553fd2"
+source = "git+https://github.com/stefan-gorules/rquickjs.git?branch=master#63f81680790a352925aded332eff21ef3cf19570"
 dependencies = [
  "cc",
 ]
