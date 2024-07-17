@@ -1,3 +1,10 @@
+# [1.7.0](https://github.com/gorules/editor/compare/v1.6.0...v1.7.0) (2024-07-17)
+
+
+### Features
+
+* upgrade zen engine v0.24.x ([#12](https://github.com/gorules/editor/issues/12)) ([24888ff](https://github.com/gorules/editor/commit/24888ffc5fc6e164279b8e87424fe868856468de))
+
 # [1.6.0](https://github.com/gorules/editor/compare/v1.5.1...v1.6.0) (2024-07-05)
 
 
