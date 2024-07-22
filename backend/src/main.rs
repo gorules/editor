@@ -1,14 +1,17 @@
-use axum::extract::DefaultBodyLimit;
+use axum::extract::{DefaultBodyLimit,Path as EPath};
+use axum::body::Bytes;
 use axum::http::StatusCode;
 use axum::response::{IntoResponse, Response};
-use axum::routing::{get, post};
+use axum::routing::{get, post, delete};
 use axum::{Extension, Json, Router};
 use serde::{Deserialize, Serialize};
 use serde_json::Value;
+use std::path::PathBuf;
 use std::env;
+use std::fs;
 use std::path::Path;
 use std::thread::available_parallelism;
-use tokio::runtime::Handle;
+use tokio::sync::Mutex;
 use tokio_util::task::LocalPoolHandle;
 use tower_http::compression::CompressionLayer;
 use tower_http::cors::CorsLayer;
@@ -20,11 +23,13 @@ use tracing_subscriber::util::SubscriberInitExt;
 use zen_engine::model::DecisionContent;
 use zen_engine::{DecisionEngine, DecisionGraphResponse, EvaluationError, EvaluationOptions};
 
-const IS_DEVELOPMENT: bool = cfg!(debug_assertions);
+const IS_DEVELOPMENT: bool = cfg!(debug_assertions);    
+const DEFAULT_RULES_DIR: &str = "/app/rules";
 
 #[tokio::main]
 async fn main() {
     let local_pool = LocalPoolHandle::new(available_parallelism().map(Into::into).unwrap_or(1));
+    let rules_dir = env::var("RULES_DIR").unwrap_or_else(|_| DEFAULT_RULES_DIR.to_string());
 
     tracing_subscriber::registry()
         .with(
@@ -37,15 +42,19 @@ async fn main() {
     let host_address = IS_DEVELOPMENT.then_some("127.0.0.1").unwrap_or("0.0.0.0");
     let listener_address = format!("{host_address}:3000");
 
+    // Correct layer usage for `LocalPoolHandle`
     let app = Router::new()
         .route("/api/health", get(health))
         .route(
             "/api/simulate",
             post(simulate).layer(DefaultBodyLimit::max(16 * 1024 * 1024)),
         )
-        .layer(Extension(local_pool))
+        .route("/api/list", get(list_files))
+        .route("/api/save/:filename", post(save_file))
+        .route("/api/delete/:filename", delete(delete_file))
+        .layer(Extension(rules_dir.clone()))
+        .layer(Extension(local_pool)) // Apply local_pool as an extension
         .nest_service("/", serve_dir_service());
-
     let listener = tokio::net::TcpListener::bind(listener_address)
         .await
         .unwrap();
@@ -61,6 +70,47 @@ async fn main() {
     }
 
     axum::serve(listener, app_with_layers).await.unwrap();
+}
+
+async fn list_files(Extension(rules_dir): Extension<String>) -> impl IntoResponse {
+    let rules_dir = PathBuf::from(rules_dir);
+    let mut file_list = Vec::new();
+
+    if let Ok(entries) = fs::read_dir(rules_dir) {
+        for entry in entries {
+            if let Ok(entry) = entry {
+                if let Ok(file_name) = entry.file_name().into_string() {
+                    if file_name.ends_with(".json") {
+                        file_list.push(file_name);
+                    }
+                }
+            }
+        }
+    }
+
+    Json(file_list)
+}
+
+async fn save_file(
+    EPath(filename): EPath<String>,
+    Extension(rules_dir): Extension<String>, 
+    value: Bytes
+) -> StatusCode {
+    let file_path = PathBuf::from(format!("{}/{}", rules_dir, filename));
+
+    match fs::write(file_path, value) {
+        Ok(_) => StatusCode::OK,
+        Err(_) => StatusCode::INTERNAL_SERVER_ERROR,
+    }
+}
+
+async fn delete_file(EPath(filename): EPath<String>, Extension(rules_dir): Extension<String>) -> impl IntoResponse {
+    let file_path = PathBuf::from(format!("{}/{}", rules_dir, filename));
+
+    match fs::remove_file(file_path) {
+        Ok(_) => StatusCode::OK,
+        Err(_) => StatusCode::NOT_FOUND,
+    }
 }
 
 fn serve_dir_service() -> ServeDir<SetStatus<ServeFile>> {

@@ -1,7 +1,10 @@
-import { DecisionContent } from '../helpers/graph.ts';
+import { LabeledDecisionContent } from '../helpers/graph.ts';
 
-export const decisionTemplates: Record<string, DecisionContent> = {
+
+
+export const decisionTemplates: Record<string, LabeledDecisionContent> = {
   'shipping-fees': {
+    label: 'Shipping Fees',
     edges: [
       {
         id: '1dfbc57d-ad1f-4cf8-978a-e43241856fc8',

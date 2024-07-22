@@ -287,18 +287,12 @@ export const DecisionSimplePage: React.FC = () => {
                         {
                           type: 'divider',
                         },
-                        {
-                          label: 'Fintech: Company analysis',
-                          key: 'company-analysis',
-                        },
-                        {
-                          label: 'Fintech: AML',
-                          key: 'aml',
-                        },
-                        {
-                          label: 'Retail: Shipping fees',
-                          key: 'shipping-fees',
-                        },
+                        ...Object.keys(decisionTemplates).map(d => {
+                          return {
+                            label: decisionTemplates[d].label ?? d,
+                            key: d,
+                          };
+                        })
                       ],
                     }}
                   >

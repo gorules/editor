@@ -25,3 +25,8 @@ export type DecisionContent = {
   nodes: DecisionNode[];
   edges: DecisionEdge[];
 };
+
+
+export type LabeledDecisionContent = DecisionContent & {
+  label?: string;
+};
