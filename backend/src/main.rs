@@ -5,7 +5,7 @@ use axum::response::{IntoResponse, Response};
 use axum::routing::{get, post, delete};
 use axum::{Extension, Json, Router};
 use serde::{Deserialize, Serialize};
-use serde_json::Value;
+use serde_json::{json, Value};
 use std::path::PathBuf;
 use std::env;
 use std::fs;
@@ -74,21 +74,27 @@ async fn main() {
 
 async fn list_files(Extension(rules_dir): Extension<String>) -> impl IntoResponse {
     let rules_dir = PathBuf::from(rules_dir);
-    let mut file_list = Vec::new();
+    let mut file_map = serde_json::Map::new();
 
     if let Ok(entries) = fs::read_dir(rules_dir) {
         for entry in entries {
             if let Ok(entry) = entry {
                 if let Ok(file_name) = entry.file_name().into_string() {
                     if file_name.ends_with(".json") {
-                        file_list.push(file_name);
+                        let file_path = entry.path();
+                        if let Ok(file_content) = fs::read_to_string(&file_path) {
+                            if let Ok(json_content) = serde_json::from_str(&file_content) {
+                                let key = file_name.trim_end_matches(".json").to_string();
+                                file_map.insert(key, json_content);
+                            }
+                        }
                     }
                 }
             }
         }
     }
 
-    Json(file_list)
+    Json(json!(file_map))
 }
 
 async fn save_file(
@@ -96,7 +102,7 @@ async fn save_file(
     Extension(rules_dir): Extension<String>, 
     value: Bytes
 ) -> StatusCode {
-    let file_path = PathBuf::from(format!("{}/{}", rules_dir, filename));
+    let file_path = PathBuf::from(format!("{}/{}.json", rules_dir, filename));
 
     match fs::write(file_path, value) {
         Ok(_) => StatusCode::OK,
@@ -105,7 +111,7 @@ async fn save_file(
 }
 
 async fn delete_file(EPath(filename): EPath<String>, Extension(rules_dir): Extension<String>) -> impl IntoResponse {
-    let file_path = PathBuf::from(format!("{}/{}", rules_dir, filename));
+    let file_path = PathBuf::from(format!("{}/{}.json", rules_dir, filename));
 
     match fs::remove_file(file_path) {
         Ok(_) => StatusCode::OK,

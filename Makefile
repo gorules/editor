@@ -1,8 +1,8 @@
 deps:
 	sudo apt-get install mkcert -y
-	
+
 watch:
-	RULES_DIR=../../rules RUSTFLAGS=-Awarnings cargo watch -c -w backend/src -x run
+	RULES_DIR=./rules RUSTFLAGS=-Awarnings cargo watch -c -w backend/src -x run
 
 build:
 	docker build .
