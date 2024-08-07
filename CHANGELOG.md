@@ -1,3 +1,10 @@
+# [1.8.0](https://github.com/gorules/editor/compare/v1.7.1...v1.8.0) (2024-08-07)
+
+
+### Features
+
+* upgrade gorules deps ([#14](https://github.com/gorules/editor/issues/14)) ([e894d3f](https://github.com/gorules/editor/commit/e894d3fdfcbc890ad51c43a87c66680a8b4f6db3))
+
 ## [1.7.1](https://github.com/gorules/editor/compare/v1.7.0...v1.7.1) (2024-07-17)
 
 
