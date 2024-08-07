@@ -12,8 +12,8 @@ importers:
         specifier: ^5.2.6
         version: 5.2.6(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
       '@gorules/jdm-editor':
-        specifier: 1.10.0
-        version: 1.10.0(@types/node@20.10.1)(@types/react@18.2.39)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
+        specifier: 1.12.0
+        version: 1.12.0(@types/node@20.10.1)(@types/react@18.2.39)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
       ace-builds:
         specifier: ^1.31.2
         version: 1.31.2
@@ -382,8 +382,8 @@ packages:
   '@fast-csv/parse@4.3.6':
     resolution: {integrity: sha512-uRsLYksqpbDmWaSmzvJcuApSEe38+6NQZBUsuAyMZKqHxH0g1wcJgsKUvN3WC8tewaqFjBMMGrkHmC+T7k8LvA==}
 
-  '@gorules/jdm-editor@1.10.0':
-    resolution: {integrity: sha512-0dlFINAve6qj2SUd7LxEGZnKfGuIXD8r4SwHcweS9gA7gQwdgAses9WD9/WEaAa8xL5FohQDHn7hOI61oU2/AQ==}
+  '@gorules/jdm-editor@1.12.0':
+    resolution: {integrity: sha512-AkSqD0KsjJTqTaKXZKwwRxFejwizmRYSbbXn21nJhQWF6IHWveAdnudKcrhw1zPQ9ngLXPUGkq+W7YzHRr1MHg==}
     peerDependencies:
       react: '>= 18'
       react-dom: '>= 18'
@@ -391,8 +391,8 @@ packages:
   '@gorules/lezer-zen-template@0.2.0':
     resolution: {integrity: sha512-sxBr3QORV1cBAeNHmqJqGWaWH7nRswL1UhdMVLcRluYB4Ddx+SmRtqvfSLzJ3XjZ8Z7NmXj17fjBB8dq7WdTYw==}
 
-  '@gorules/lezer-zen@0.3.0':
-    resolution: {integrity: sha512-n2zlZLge+h1Fzy501loX5yYKaM4ctbUaUJZmsM3cfG5IjgNwn1368/ZLPf/suWyBodK+YyL/Uy+lDv1IB49eYQ==}
+  '@gorules/lezer-zen@0.4.0':
+    resolution: {integrity: sha512-N75LNw8fhmzzVWhfzdvVjeeXFLvfaD+nEMpNedqUfJ1kuqtWL2qZGvbBuQgQwLHDWrmsrKopkuwf+/4E+h7Bcw==}
 
   '@humanwhocodes/config-array@0.11.13':
     resolution: {integrity: sha512-JSBDMiDKSzQVngfRjOdFXgFfklaXI4K9nLF49Auh21lmBWRLIK3+xTErTWD4KU54pb6coM6ESE7Awz/FNU3zgQ==}
@@ -3380,6 +3380,9 @@ packages:
     resolution: {integrity: sha512-9qv4rlDiopXg4E69k+vMHjNN63YFMe9sZMrdlvKnCjlCRWeCBswPPMPUfx+ipsAWq1LXHe70RcbaHdJJpS6hyQ==}
     engines: {node: '>= 10'}
 
+  zod@3.23.8:
+    resolution: {integrity: sha512-XBx9AXhXktjUqnepgTiE5flcKIYWi/rme0Eaj+5Y0lftuGBq+jyRu/md4WnuxqgP1ubdpNCsYEYPxrzVHD8d6g==}
+
   zustand@4.5.2:
     resolution: {integrity: sha512-2cN1tPkDVkwCy5ickKrI7vijSjPksFRfqS6237NzT0vqSsztTNnQdHw9mmN7uBdk3gceVXU0a+21jFzFzAc9+g==}
     engines: {node: '>=12.7.0'}
@@ -3641,7 +3644,7 @@ snapshots:
       lodash.isundefined: 3.0.1
       lodash.uniq: 4.5.0
 
-  '@gorules/jdm-editor@1.10.0(@types/node@20.10.1)(@types/react@18.2.39)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)':
+  '@gorules/jdm-editor@1.12.0(@types/node@20.10.1)(@types/react@18.2.39)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)':
     dependencies:
       '@ant-design/icons': 5.3.7(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
       '@codemirror/autocomplete': 6.16.0(@codemirror/language@6.10.1)(@codemirror/state@6.4.1)(@codemirror/view@6.26.3)(@lezer/common@1.2.1)
@@ -3649,7 +3652,7 @@ snapshots:
       '@codemirror/lint': 6.8.1
       '@codemirror/state': 6.4.1
       '@codemirror/view': 6.26.3
-      '@gorules/lezer-zen': 0.3.0
+      '@gorules/lezer-zen': 0.4.0
       '@gorules/lezer-zen-template': 0.2.0
       '@lezer/common': 1.2.1
       '@lezer/highlight': 1.2.0
@@ -3675,6 +3678,7 @@ snapshots:
       reactflow: 11.11.3(@types/react@18.2.39)(immer@10.1.1)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
       ts-pattern: 5.2.0
       use-debounce: 10.0.0(react@18.2.0)
+      zod: 3.23.8
       zustand: 4.5.2(@types/react@18.2.39)(immer@10.1.1)(react@18.2.0)
     transitivePeerDependencies:
       - '@types/hoist-non-react-statics'
@@ -3690,7 +3694,7 @@ snapshots:
       '@lezer/highlight': 1.2.0
       '@lezer/lr': 1.4.0
 
-  '@gorules/lezer-zen@0.3.0':
+  '@gorules/lezer-zen@0.4.0':
     dependencies:
       '@lezer/common': 1.2.1
       '@lezer/highlight': 1.2.0
@@ -6984,6 +6988,8 @@ snapshots:
       archiver-utils: 3.0.4
       compress-commons: 4.1.2
       readable-stream: 3.6.2
+
+  zod@3.23.8: {}
 
   zustand@4.5.2(@types/react@18.2.39)(immer@10.1.1)(react@18.2.0):
     dependencies:
