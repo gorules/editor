@@ -384,6 +384,24 @@ export const DecisionSimplePage: React.FC = () => {
 
                           setGraphTrace({ result: data });
                         } catch (e) {
+                          const errorMessage = match(e)
+                            .with(
+                              {
+                                response: {
+                                  data: {
+                                    type: P.string,
+                                    source: P.string,
+                                  },
+                                },
+                              },
+                              ({ response: { data: d } }) => `${d.type}: ${d.source}`,
+                            )
+                            .with({ response: { data: { source: P.string } } }, (d) => d.response.data.source)
+                            .with({ response: { data: { message: P.string } } }, (d) => d.response.data.message)
+                            .with({ message: P.string }, (d) => d.message)
+                            .otherwise(() => 'Unknown error occurred');
+
+                          message.error(errorMessage);
                           if (axios.isAxiosError(e)) {
                             setGraphTrace({
                               error: {
