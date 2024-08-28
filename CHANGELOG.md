@@ -1,3 +1,10 @@
+# [1.9.0](https://github.com/gorules/editor/compare/v1.8.0...v1.9.0) (2024-08-28)
+
+
+### Features
+
+* update editor ([#15](https://github.com/gorules/editor/issues/15)) ([caaea1a](https://github.com/gorules/editor/commit/caaea1a08a9210070841736c63260b39e0e54360))
+
 # [1.8.0](https://github.com/gorules/editor/compare/v1.7.1...v1.8.0) (2024-08-07)
 
 
