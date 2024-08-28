@@ -8,7 +8,6 @@ use serde_json::Value;
 use std::env;
 use std::path::Path;
 use std::thread::available_parallelism;
-use tokio::runtime::Handle;
 use tokio_util::task::LocalPoolHandle;
 use tower_http::compression::CompressionLayer;
 use tower_http::cors::CorsLayer;
