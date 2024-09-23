@@ -1,3 +1,10 @@
+# [1.10.0](https://github.com/gorules/editor/compare/v1.9.0...v1.10.0) (2024-09-23)
+
+
+### Features
+
+* intellisense ([#17](https://github.com/gorules/editor/issues/17)) ([53e48a2](https://github.com/gorules/editor/commit/53e48a22608f36027365b93efd6356f87e612912))
+
 # [1.9.0](https://github.com/gorules/editor/compare/v1.8.0...v1.9.0) (2024-08-28)
 
 
