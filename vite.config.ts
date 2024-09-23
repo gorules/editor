@@ -8,6 +8,7 @@ export default defineConfig({
   plugins: [react(), wasm()],
   build: {
     outDir: path.join(__dirname, 'static'),
+    target: 'esnext',
   },
   server: {
     https: {
