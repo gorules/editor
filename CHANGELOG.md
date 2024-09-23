@@ -1,3 +1,10 @@
+## [1.10.2](https://github.com/gorules/editor/compare/v1.10.1...v1.10.2) (2024-09-23)
+
+
+### Bug Fixes
+
+* update jdm editor ([537826b](https://github.com/gorules/editor/commit/537826bc45d9be1601c7c37a688dcbf3a50bca70))
+
 ## [1.10.1](https://github.com/gorules/editor/compare/v1.10.0...v1.10.1) (2024-09-23)
 
 
