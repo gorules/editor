@@ -14,7 +14,8 @@
   },
   "dependencies": {
     "@ant-design/icons": "^5.4.0",
-    "@gorules/jdm-editor": "1.14.0",
+    "@gorules/jdm-editor": "^1.17.0",
+    "@gorules/zen-engine-wasm": "^0.8.0",
     "ace-builds": "^1.36.0",
     "antd": "^5.20.3",
     "axios": "^1.7.5",
@@ -26,7 +27,8 @@
     "react-dom": "^18.3.1",
     "react-router": "^6.26.1",
     "react-router-dom": "^6.26.1",
-    "ts-pattern": "^5.3.1"
+    "ts-pattern": "^5.3.1",
+    "vite-plugin-wasm": "^3.3.0"
   },
   "devDependencies": {
     "@semantic-release/changelog": "^6.0.3",

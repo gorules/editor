@@ -1,3 +1,6 @@
+import * as zenWasm from '@gorules/zen-engine-wasm';
+import zenWasmUrl from '@gorules/zen-engine-wasm/dist/zen_engine_wasm_bg.wasm?url';
+
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 
@@ -19,6 +22,10 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { DecisionSimplePage } from './pages/decision-simple.tsx';
 import { NotFoundPage } from './pages/not-found';
 import { ThemeContextProvider } from './context/theme.provider.tsx';
+
+await zenWasm.default(zenWasmUrl);
+// eslint-disable-next-line
+(window as any).zenWasm = zenWasm;
 
 const router = createBrowserRouter([
   {
