@@ -1,3 +1,10 @@
+## [1.10.1](https://github.com/gorules/editor/compare/v1.10.0...v1.10.1) (2024-09-23)
+
+
+### Bug Fixes
+
+* update build target ([833d54c](https://github.com/gorules/editor/commit/833d54c2dac4b2172786f66a0080972026b0e75a))
+
 # [1.10.0](https://github.com/gorules/editor/compare/v1.9.0...v1.10.0) (2024-09-23)
 
 
