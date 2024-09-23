@@ -12,11 +12,11 @@ importers:
         specifier: ^5.4.0
         version: 5.4.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@gorules/jdm-editor':
-        specifier: ^1.17.1
-        version: 1.17.1(@types/node@22.5.1)(@types/react@18.3.4)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+        specifier: ^1.17.2
+        version: 1.17.2(@types/node@22.5.1)(@types/react@18.3.4)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@gorules/zen-engine-wasm':
-        specifier: ^0.8.1
-        version: 0.8.1
+        specifier: ^0.8.2
+        version: 0.8.2
       ace-builds:
         specifier: ^1.36.0
         version: 1.36.0
@@ -400,8 +400,8 @@ packages:
   '@fast-csv/parse@4.3.6':
     resolution: {integrity: sha512-uRsLYksqpbDmWaSmzvJcuApSEe38+6NQZBUsuAyMZKqHxH0g1wcJgsKUvN3WC8tewaqFjBMMGrkHmC+T7k8LvA==}
 
-  '@gorules/jdm-editor@1.17.1':
-    resolution: {integrity: sha512-oPJFP1VU7YGzkV/fiKb5fpIGHIINzSia7PLLBFu/fEwjvJsp77IvHWSBM0rnIZptQDoopn00HnfDyBOiKw1jgA==}
+  '@gorules/jdm-editor@1.17.2':
+    resolution: {integrity: sha512-80kJfGqxQHdJbZNouY0X3vgTIQINyjGHqAO8tXjMRldJf/AU2nEl4KirFbeoJ2FBrsYWq4ThSpWC36IBV0fefg==}
     peerDependencies:
       react: '>= 18'
       react-dom: '>= 18'
@@ -412,8 +412,8 @@ packages:
   '@gorules/lezer-zen@0.5.0':
     resolution: {integrity: sha512-rKEaTacgvOaG39yLIfENLW1XaNOrrnuJch8PUbKBwIImy3f78UtVggy3UBEnB5Oe5ICV/bVfQ/DW7AcxTvCjXA==}
 
-  '@gorules/zen-engine-wasm@0.8.1':
-    resolution: {integrity: sha512-0UnJOaxSQE4IMtrOvBj1YnKpVvDeXKIshyBZbD6R18foI3FmB8veqoqQ7Ufnw+wWRUpLnmnZbtDDLeE4+uIY+Q==}
+  '@gorules/zen-engine-wasm@0.8.2':
+    resolution: {integrity: sha512-hsWG9NSRBxgy2S+IoEn6E+d4NDWouS+hxY/YFRt6fJaDT/ujYnI1g1KNgKntMdFt15mefj26RdZhn0t+xHEQDg==}
 
   '@humanwhocodes/config-array@0.11.14':
     resolution: {integrity: sha512-3T8LkOmg45BV5FICb15QQMsyUSWrQ8AygVfC7ZG32zOalnqrilm018ZVCw0eapXux8FtA33q8PSRSstjee3jSg==}
@@ -3607,7 +3607,7 @@ snapshots:
       lodash.isundefined: 3.0.1
       lodash.uniq: 4.5.0
 
-  '@gorules/jdm-editor@1.17.1(@types/node@22.5.1)(@types/react@18.3.4)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
+  '@gorules/jdm-editor@1.17.2(@types/node@22.5.1)(@types/react@18.3.4)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
     dependencies:
       '@ant-design/icons': 5.5.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@codemirror/autocomplete': 6.18.1(@codemirror/language@6.10.3)(@codemirror/state@6.4.1)(@codemirror/view@6.33.0)(@lezer/common@1.2.1)
@@ -3663,7 +3663,7 @@ snapshots:
       '@lezer/highlight': 1.2.1
       '@lezer/lr': 1.4.2
 
-  '@gorules/zen-engine-wasm@0.8.1': {}
+  '@gorules/zen-engine-wasm@0.8.2': {}
 
   '@humanwhocodes/config-array@0.11.14':
     dependencies:
