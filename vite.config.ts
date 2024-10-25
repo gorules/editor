@@ -10,6 +10,9 @@ export default defineConfig({
     outDir: path.join(__dirname, 'static'),
     target: 'esnext',
   },
+  resolve: {
+    dedupe: ['react', 'react-dom'],
+  },
   server: {
     https: {
       cert: path.join(__dirname, 'cert', 'localhost.pem'),

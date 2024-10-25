@@ -24,8 +24,6 @@ import { NotFoundPage } from './pages/not-found';
 import { ThemeContextProvider } from './context/theme.provider.tsx';
 
 await zenWasm.default(zenWasmUrl);
-// eslint-disable-next-line
-(window as any).zenWasm = zenWasm;
 
 const router = createBrowserRouter([
   {
