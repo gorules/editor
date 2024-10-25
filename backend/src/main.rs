@@ -17,7 +17,7 @@ use tower_http::trace::TraceLayer;
 use tracing_subscriber::layer::SubscriberExt;
 use tracing_subscriber::util::SubscriberInitExt;
 use zen_engine::model::DecisionContent;
-use zen_engine::{DecisionEngine, DecisionGraphResponse, EvaluationError, EvaluationOptions};
+use zen_engine::{DecisionEngine, EvaluationError, EvaluationOptions};
 
 const IS_DEVELOPMENT: bool = cfg!(debug_assertions);
 
@@ -85,7 +85,7 @@ struct SimulateRequest {
 async fn simulate(
     Extension(local_pool): Extension<LocalPoolHandle>,
     Json(payload): Json<SimulateRequest>,
-) -> Result<Json<DecisionGraphResponse>, SimulateError> {
+) -> Result<Json<Value>, SimulateError> {
     let engine = DecisionEngine::default();
     let decision = engine.create_decision(payload.content.into());
 
@@ -93,18 +93,20 @@ async fn simulate(
         .spawn_pinned(move || async move {
             decision
                 .evaluate_with_opts(
-                    &payload.context,
+                    payload.context.into(),
                     EvaluationOptions {
                         trace: Some(true),
                         max_depth: None,
                     },
                 )
                 .await
+                .map(serde_json::to_value)
         })
         .await
-        .expect("Thread failed to join")?;
+        .expect("Thread failed to join")?
+        .map_err(|_| SimulateError::from(Box::new(EvaluationError::DepthLimitExceeded)))?;
 
-    return Ok(Json(result));
+    Ok(Json(result))
 }
 
 struct SimulateError(Box<EvaluationError>);
