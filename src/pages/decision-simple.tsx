@@ -5,7 +5,7 @@ import { decisionTemplates } from '../assets/decision-templates';
 import { displayError } from '../helpers/error-message.ts';
 import { DecisionContent, DecisionEdge, DecisionNode } from '../helpers/graph.ts';
 import { useSearchParams } from 'react-router-dom';
-import { DecisionGraph, DecisionGraphRef, GraphSimulator, Simulation } from '@gorules/jdm-editor';
+import { DecisionGraph, DecisionGraphRef, DecisionGraphType, GraphSimulator, Simulation } from '@gorules/jdm-editor';
 import { PageHeader } from '../components/page-header.tsx';
 import { DirectedGraph } from 'graphology';
 import { hasCycle } from 'graphology-dag';
@@ -30,7 +30,7 @@ export const DecisionSimplePage: React.FC = () => {
 
   const [searchParams] = useSearchParams();
   const [fileHandle, setFileHandle] = useState<FileSystemFileHandle>();
-  const [graph, setGraph] = useState<DecisionContent>({ nodes: [], edges: [] });
+  const [graph, setGraph] = useState<DecisionGraphType>({ nodes: [], edges: [] });
   const [fileName, setFileName] = useState('Untitled Decision');
   const [graphTrace, setGraphTrace] = useState<Simulation>();
 
