@@ -1,3 +1,10 @@
+## [1.11.1](https://github.com/gorules/editor/compare/v1.11.0...v1.11.1) (2024-10-25)
+
+
+### Bug Fixes
+
+* cargo lock ([#19](https://github.com/gorules/editor/issues/19)) ([a1b5bf3](https://github.com/gorules/editor/commit/a1b5bf338b0028cf77b7cc7f904a048fe082cca7))
+
 # [1.11.0](https://github.com/gorules/editor/compare/v1.10.3...v1.11.0) (2024-10-25)
 
 
