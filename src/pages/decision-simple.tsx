@@ -403,7 +403,13 @@ export const DecisionSimplePage: React.FC = () => {
 
                           message.error(errorMessage);
                           if (axios.isAxiosError(e)) {
+                            console.log(e);
                             setGraphTrace({
+                              result: {
+                                result: null,
+                                trace: e.response?.data?.trace,
+                                performance: '',
+                              },
                               error: {
                                 message: e.response?.data?.source,
                                 data: e.response?.data,
