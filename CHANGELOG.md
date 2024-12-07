@@ -1,3 +1,10 @@
+# [1.12.0](https://github.com/gorules/editor/compare/v1.11.1...v1.12.0) (2024-12-07)
+
+
+### Features
+
+* update packages ([#20](https://github.com/gorules/editor/issues/20)) ([725ffe0](https://github.com/gorules/editor/commit/725ffe03c9a01d27be4fa7cda9bc3733484bd963))
+
 ## [1.11.1](https://github.com/gorules/editor/compare/v1.11.0...v1.11.1) (2024-10-25)
 
 
