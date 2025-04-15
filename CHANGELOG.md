@@ -1,3 +1,10 @@
+## [1.13.1](https://github.com/gorules/editor/compare/v1.13.0...v1.13.1) (2025-04-15)
+
+
+### Bug Fixes
+
+* update rust-builder version in Dockerfile ([363eaa3](https://github.com/gorules/editor/commit/363eaa3070193c98e02d105eab2b9bd350455cc3))
+
 # [1.13.0](https://github.com/gorules/editor/compare/v1.12.0...v1.13.0) (2025-04-15)
 
 
