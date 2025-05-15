@@ -1,3 +1,10 @@
+# [1.14.0](https://github.com/gorules/editor/compare/v1.13.1...v1.14.0) (2025-05-15)
+
+
+### Features
+
+* update zen ([#30](https://github.com/gorules/editor/issues/30)) ([2ca24a7](https://github.com/gorules/editor/commit/2ca24a7a8875329bd84176d971985e48eef7b8fe))
+
 ## [1.13.1](https://github.com/gorules/editor/compare/v1.13.0...v1.13.1) (2025-04-15)
 
 
