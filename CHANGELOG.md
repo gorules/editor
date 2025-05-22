@@ -1,3 +1,10 @@
+## [1.14.1](https://github.com/gorules/editor/compare/v1.14.0...v1.14.1) (2025-05-22)
+
+
+### Bug Fixes
+
+* downgrade react 18 ([#33](https://github.com/gorules/editor/issues/33)) ([f15de19](https://github.com/gorules/editor/commit/f15de19707616346599ecb79a3930e30f161f69e))
+
 # [1.14.0](https://github.com/gorules/editor/compare/v1.13.1...v1.14.0) (2025-05-15)
 
 
