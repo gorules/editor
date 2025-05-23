@@ -1,3 +1,10 @@
+# [1.15.0](https://github.com/gorules/editor/compare/v1.14.2...v1.15.0) (2025-05-23)
+
+
+### Features
+
+* update zen ([#35](https://github.com/gorules/editor/issues/35)) ([600f456](https://github.com/gorules/editor/commit/600f4565eb2745749745ad0cf265740275597b21))
+
 ## [1.14.2](https://github.com/gorules/editor/compare/v1.14.1...v1.14.2) (2025-05-22)
 
 
