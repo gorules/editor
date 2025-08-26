@@ -17,7 +17,7 @@ use tower_http::trace::TraceLayer;
 use tracing_subscriber::layer::SubscriberExt;
 use tracing_subscriber::util::SubscriberInitExt;
 use zen_engine::model::DecisionContent;
-use zen_engine::{DecisionEngine, EvaluationError, EvaluationOptions};
+use zen_engine::{DecisionEngine, EvaluationSerializedOptions, EvaluationTraceKind};
 
 const IS_DEVELOPMENT: bool = cfg!(debug_assertions);
 
@@ -85,44 +85,39 @@ struct SimulateRequest {
 async fn simulate(
     Extension(local_pool): Extension<LocalPoolHandle>,
     Json(payload): Json<SimulateRequest>,
-) -> Result<Json<Value>, SimulateError> {
+) -> Result<Json<Value>, JsonError> {
     let engine = DecisionEngine::default();
     let decision = engine.create_decision(payload.content.into());
 
     let result = local_pool
         .spawn_pinned(move || async move {
             decision
-                .evaluate_with_opts(
+                .evaluate_serialized(
                     payload.context.into(),
-                    EvaluationOptions {
-                        trace: Some(true),
+                    EvaluationSerializedOptions {
+                        trace: EvaluationTraceKind::Default,
                         max_depth: None,
                     },
                 )
                 .await
                 .map(serde_json::to_value)
+                .map_err(JsonError)
         })
         .await
         .expect("Thread failed to join")?
-        .map_err(|_| SimulateError::from(Box::new(EvaluationError::DepthLimitExceeded)))?;
+        .map_err(|_| JsonError(Value::String("Failed to serialize JSON".to_string())))?;
 
     Ok(Json(result))
 }
 
-struct SimulateError(Box<EvaluationError>);
+pub struct JsonError(pub Value);
 
-impl IntoResponse for SimulateError {
+impl IntoResponse for JsonError {
     fn into_response(self) -> Response {
         (
             StatusCode::BAD_REQUEST,
             serde_json::to_string(&self.0).unwrap_or_default(),
         )
             .into_response()
-    }
-}
-
-impl From<Box<EvaluationError>> for SimulateError {
-    fn from(value: Box<EvaluationError>) -> Self {
-        Self(value)
     }
 }

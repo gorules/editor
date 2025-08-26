@@ -12,11 +12,11 @@ importers:
         specifier: ^6.0.0
         version: 6.0.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@gorules/jdm-editor':
-        specifier: ^1.41.0
-        version: 1.41.0(@types/node@22.15.21)(@types/react@18.3.22)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+        specifier: ^1.46.0
+        version: 1.46.0(@types/node@22.15.21)(@types/react@18.3.22)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@gorules/zen-engine-wasm':
-        specifier: ^0.18.0
-        version: 0.18.0
+        specifier: ^0.21.0
+        version: 0.21.0
       ace-builds:
         specifier: ^1.41.0
         version: 1.41.0
@@ -436,8 +436,8 @@ packages:
   '@fast-csv/parse@4.3.6':
     resolution: {integrity: sha512-uRsLYksqpbDmWaSmzvJcuApSEe38+6NQZBUsuAyMZKqHxH0g1wcJgsKUvN3WC8tewaqFjBMMGrkHmC+T7k8LvA==}
 
-  '@gorules/jdm-editor@1.41.0':
-    resolution: {integrity: sha512-JL4ih8Hu8/Q9orkDAWxriMAgcNo315pySVeOuWF2Skvhn0gJE8n2ljHSy2MtjBjQDqhCp+CBpTOmRIoRRPlxYA==}
+  '@gorules/jdm-editor@1.46.0':
+    resolution: {integrity: sha512-aHU645trsh4z111t5ZTXBkjyQu21Ab4Vd/K6ML/jQfOFvd1Aq59HaA7WTqArfbBPWVuJ1bWONMs8+Gj37zEQAg==}
     peerDependencies:
       react: '>= 18'
       react-dom: '>= 18'
@@ -445,11 +445,11 @@ packages:
   '@gorules/lezer-zen-template@0.4.0':
     resolution: {integrity: sha512-YKwT04f0QfScxahqf1I1jE1qxCq8xiAzIEwYiwECpXis3yASezgijpddeKqFL1jTAH8nF5Zy84N+ZkPOUqzO7A==}
 
-  '@gorules/lezer-zen@0.7.0':
-    resolution: {integrity: sha512-4jQ2cit9FZarm/gDs+EfjTkjKVeKxud3pzm/gsBgL+Ddp+sx4O8iwcw6w5VdDcK0SYdJ/I0HcUi1bPmVilxJDQ==}
+  '@gorules/lezer-zen@0.8.0':
+    resolution: {integrity: sha512-hwUpfpZfkGWQWnCBwbOYYMG1gkveTvxGVqdm9w+AyiT1F5WIboRaNEslMTRGyMiGr3WwLDN1Z3muEyCj1nfGQw==}
 
-  '@gorules/zen-engine-wasm@0.18.0':
-    resolution: {integrity: sha512-lUpLJ8WNAtF+CdCuQI5tLl4M5TNhIcWbILkBGMTkS75c0H8D6XoLhj/MCvmPT3kuBn7nFm2+q3e+CnUpi4xKwg==}
+  '@gorules/zen-engine-wasm@0.21.0':
+    resolution: {integrity: sha512-l+Vo2e0z7PKBehNCAJ2UH1aQs9Nxgw1sJJhRPwXCNZq5vlndj9Y+u//nbcB6AN4AAtXHIPnq8S5BJI2i7O8tqw==}
 
   '@humanfs/core@0.19.1':
     resolution: {integrity: sha512-5DyQ4+1JEUzejeK1JGICcideyfUbGixgS9jNgex5nqkW+cY7WZhxBigmieN5Qnw9ZosSNVC9KQKyb+GUaGyKUA==}
@@ -3815,7 +3815,7 @@ snapshots:
       lodash.isundefined: 3.0.1
       lodash.uniq: 4.5.0
 
-  '@gorules/jdm-editor@1.41.0(@types/node@22.15.21)(@types/react@18.3.22)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
+  '@gorules/jdm-editor@1.46.0(@types/node@22.15.21)(@types/react@18.3.22)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
     dependencies:
       '@ant-design/icons': 6.0.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@codemirror/autocomplete': 6.18.6
@@ -3824,9 +3824,9 @@ snapshots:
       '@codemirror/lint': 6.8.5
       '@codemirror/state': 6.5.2
       '@codemirror/view': 6.36.5
-      '@gorules/lezer-zen': 0.7.0
+      '@gorules/lezer-zen': 0.8.0
       '@gorules/lezer-zen-template': 0.4.0
-      '@gorules/zen-engine-wasm': 0.18.0
+      '@gorules/zen-engine-wasm': 0.21.0
       '@lezer/common': 1.2.3
       '@lezer/highlight': 1.2.1
       '@lezer/lr': 1.4.2
@@ -3873,13 +3873,13 @@ snapshots:
       '@lezer/highlight': 1.2.1
       '@lezer/lr': 1.4.2
 
-  '@gorules/lezer-zen@0.7.0':
+  '@gorules/lezer-zen@0.8.0':
     dependencies:
       '@lezer/common': 1.2.3
       '@lezer/highlight': 1.2.1
       '@lezer/lr': 1.4.2
 
-  '@gorules/zen-engine-wasm@0.18.0': {}
+  '@gorules/zen-engine-wasm@0.21.0': {}
 
   '@humanfs/core@0.19.1': {}
 
