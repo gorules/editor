@@ -254,7 +254,7 @@ export const DecisionSimplePage: React.FC = () => {
                 type="text"
                 target="_blank"
                 href="https://gorules.io"
-                icon={<img height={24} width={24} src={'/favicon.svg'} />}
+                icon={<img height={32} width={32} src={'/favicon.svg'} />}
               />
               <Divider type="vertical" style={{ margin: 0 }} />
               <div className={classes.headingContent}>

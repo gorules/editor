@@ -4,9 +4,10 @@ use axum::response::{IntoResponse, Response};
 use axum::routing::{get, post};
 use axum::{Extension, Json, Router};
 use serde::{Deserialize, Serialize};
-use serde_json::Value;
+use serde_json::{json, Value};
 use std::env;
 use std::path::Path;
+use std::sync::atomic::Ordering;
 use std::thread::available_parallelism;
 use tokio_util::task::LocalPoolHandle;
 use tower_http::compression::CompressionLayer;
@@ -17,13 +18,14 @@ use tower_http::trace::TraceLayer;
 use tracing_subscriber::layer::SubscriberExt;
 use tracing_subscriber::util::SubscriberInitExt;
 use zen_engine::model::DecisionContent;
-use zen_engine::{DecisionEngine, EvaluationError, EvaluationOptions};
+use zen_engine::{DecisionEngine, EvaluationSerializedOptions, EvaluationTraceKind, ZEN_CONFIG};
 
 const IS_DEVELOPMENT: bool = cfg!(debug_assertions);
 
 #[tokio::main]
 async fn main() {
     let local_pool = LocalPoolHandle::new(available_parallelism().map(Into::into).unwrap_or(1));
+    ZEN_CONFIG.http_auth.store(false, Ordering::Relaxed);
 
     tracing_subscriber::registry()
         .with(
@@ -85,18 +87,18 @@ struct SimulateRequest {
 async fn simulate(
     Extension(local_pool): Extension<LocalPoolHandle>,
     Json(payload): Json<SimulateRequest>,
-) -> Result<Json<Value>, SimulateError> {
+) -> Result<Json<Value>, JsonError> {
     let engine = DecisionEngine::default();
     let decision = engine.create_decision(payload.content.into());
 
     let result = local_pool
         .spawn_pinned(move || async move {
             decision
-                .evaluate_with_opts(
+                .evaluate_serialized(
                     payload.context.into(),
-                    EvaluationOptions {
-                        trace: Some(true),
-                        max_depth: None,
+                    EvaluationSerializedOptions {
+                        trace: EvaluationTraceKind::Default,
+                        max_depth: 10,
                     },
                 )
                 .await
@@ -104,25 +106,21 @@ async fn simulate(
         })
         .await
         .expect("Thread failed to join")?
-        .map_err(|_| SimulateError::from(Box::new(EvaluationError::DepthLimitExceeded)))?;
+        .map_err(|err| json!({ "error": err.to_string() }))?;
 
     Ok(Json(result))
 }
 
-struct SimulateError(Box<EvaluationError>);
+struct JsonError(Value);
 
-impl IntoResponse for SimulateError {
+impl IntoResponse for JsonError {
     fn into_response(self) -> Response {
-        (
-            StatusCode::BAD_REQUEST,
-            serde_json::to_string(&self.0).unwrap_or_default(),
-        )
-            .into_response()
+        (StatusCode::BAD_REQUEST, Json(self.0)).into_response()
     }
 }
 
-impl From<Box<EvaluationError>> for SimulateError {
-    fn from(value: Box<EvaluationError>) -> Self {
-        Self(value)
+impl From<Value> for JsonError {
+    fn from(value: Value) -> Self {
+        JsonError(value)
     }
 }
