@@ -1,2 +1,2 @@
 watch:
-	RUSTFLAGS=-Awarnings cargo watch -c -w backend/src -x run
+	RUSTFLAGS=-Awarnings cargo watch -c -x run
