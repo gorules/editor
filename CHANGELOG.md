@@ -1,3 +1,15 @@
+# [1.16.0](https://github.com/gorules/editor/compare/v1.15.0...v1.16.0) (2026-01-22)
+
+
+### Bug Fixes
+
+* update node version in workflows ([#40](https://github.com/gorules/editor/issues/40)) ([31acd01](https://github.com/gorules/editor/commit/31acd01a3c6f40aa52c697f2581b04ecfca331bc))
+
+
+### Features
+
+* update engine and editor ([#39](https://github.com/gorules/editor/issues/39)) ([bb5d5d2](https://github.com/gorules/editor/commit/bb5d5d2fea905501a17ad7142bba8962a58560fb))
+
 # [1.15.0](https://github.com/gorules/editor/compare/v1.14.2...v1.15.0) (2025-05-23)
 
 
