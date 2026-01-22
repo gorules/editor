@@ -382,7 +382,6 @@ export const DecisionSimplePage: React.FC = () => {
                             content: graph,
                           });
 
-                          console.log(data);
                           setGraphTrace({ result: { ...data, snapshot: graph } });
                         } catch (e) {
                           const errorMessage = match(e)
