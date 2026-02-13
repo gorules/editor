@@ -1,3 +1,10 @@
+## [1.16.1](https://github.com/gorules/editor/compare/v1.16.0...v1.16.1) (2026-02-13)
+
+
+### Bug Fixes
+
+* downgrade to react 18 ([#42](https://github.com/gorules/editor/issues/42)) ([c2e0af1](https://github.com/gorules/editor/commit/c2e0af12b2ba56a593101dab28cee2f91653682b))
+
 # [1.16.0](https://github.com/gorules/editor/compare/v1.15.0...v1.16.0) (2026-01-22)
 
 
